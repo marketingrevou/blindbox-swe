@@ -1,0 +1,8 @@
+# Local tooling artifacts
+.playwright-mcp/
+.agents/
+skills-lock.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
