@@ -54,8 +54,8 @@
   #fx{position:absolute;inset:0;z-index:1;pointer-events:none}
 
   /* ============ BRAND BADGE ============ */
-  .brand{position:absolute;top:16px;left:50%;transform:translateX(-50%);z-index:8;
-    width:52px;height:52px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.5))}
+  .brand{position:absolute;top:16px;left:14px;z-index:8;
+    width:44px;height:44px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.5))}
 
   /* ============ MUTE TOGGLE ============ */
   .mute-btn{position:absolute;top:16px;right:14px;z-index:9;
@@ -69,14 +69,17 @@
   /* ============ SCENE SYSTEM ============ */
   .scene{position:absolute;inset:0;z-index:5;display:none;
     flex-direction:column;align-items:center;justify-content:center;
-    gap:16px;padding:74px 22px calc(26px + env(safe-area-inset-bottom)) 22px;
-    text-align:center;}
+    gap:clamp(10px,2.2vh,16px);
+    padding:64px 22px calc(26px + env(safe-area-inset-bottom)) 22px;
+    text-align:center;overflow-y:auto;}
   .scene.active{display:flex;animation:sceneIn .35s ease both}
+  /* keep centered content from clipping when it's taller than the stage */
+  .scene::before,.scene::after{content:"";flex:0 0 0;}
   @keyframes sceneIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
   /* ============ TYPOGRAPHY ============ */
   .pixel{font-family:var(--pixel);text-transform:uppercase;letter-spacing:.02em;line-height:1.5}
-  .title-logo{width:84%;max-width:330px;height:auto;
+  .title-logo{width:84%;max-width:330px;max-height:26vh;height:auto;object-fit:contain;
     filter:drop-shadow(0 6px 12px rgba(0,0,0,.5));
     animation:logopop 3.2s ease-in-out infinite}
   @keyframes logopop{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.015)}}
@@ -229,7 +232,7 @@
       <span class="cap">Diskon Hingga</span>
       <span class="big">Rp 4.500.000!</span>
     </div>
-    <div class="boxwrap" style="width:48%;aspect-ratio:819/1024">
+    <div class="boxwrap" style="width:48%;max-width:200px;aspect-ratio:819/1024;flex:0 1 auto;min-height:0">
       <div class="box-glow"></div>
       <img class="box-img box-float" src="assets/BB_.png" alt="mystery box">
     </div>
