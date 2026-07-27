@@ -609,7 +609,7 @@ function doReveal(){
 
 $('#btnClaim').addEventListener('click', () => {
   $('#noticeTitle').textContent = "Diskon Tersimpan!";
-  $('#noticeBody').innerHTML = `Diskon <b style="color:var(--gold)">${prizeLabel(state.prize)}</b> sudah tercatat untuk <b>${state.email}</b>. Tim RevoU akan menghubungi kamu. Terima kasih sudah bermain! 🎉`;
+  $('#noticeBody').innerHTML = `Diskon <b style="color:var(--gold)">${prizeLabel(state.prize)}</b> sudah tercatat untuk <b>${state.email}</b>. Silakan kirim bukti screenshot ini ke Tim RevoU yg menghubungi kamu utk kamu claim. Terima kasih sudah bermain! 🎉`;
   showScene('s-notice');
 });
 </script>
