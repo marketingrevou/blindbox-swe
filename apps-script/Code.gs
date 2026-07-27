@@ -12,14 +12,14 @@
  *        - Who has access: Anyone
  *   5. Copy the /exec URL into SHEET_API in index.html.
  *
- * Columns written: Timestamp | Name | Email | Prize | Box | UserAgent
+ * Columns written: Timestamp | Name | Email | Prize | Box | Program | UserAgent
  */
 
 // Leave "" to use the Sheet this script is bound to (Extensions → Apps Script).
 // Or paste a Sheet ID to target a standalone sheet.
 const SHEET_ID = "";
 const SHEET_NAME = "Plays";
-const HEADERS = ["Timestamp", "Name", "Email", "Prize", "Box", "UserAgent"];
+const HEADERS = ["Timestamp", "Name", "Email", "Prize", "Box", "Program", "UserAgent"];
 
 function getSheet_() {
   const ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
@@ -95,6 +95,7 @@ function doPost(e) {
       email,
       Number(body.prize) || 0,
       String(body.box || ""),
+      String(body.program || ""),
       String(body.ua || "")
     ]);
     return json_({ ok: true });

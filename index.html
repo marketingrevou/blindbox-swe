@@ -230,7 +230,7 @@
     <img class="title-logo" src="assets/logo.png" alt="Mystery Discount">
     <div class="amount">
       <span class="cap">Diskon Hingga</span>
-      <span class="big">Rp 4.500.000!</span>
+      <span class="big">Rp 5.000.000!</span>
     </div>
     <div class="boxwrap" style="width:48%;max-width:200px;aspect-ratio:819/1024;flex:0 1 auto;min-height:0">
       <div class="box-glow"></div>
@@ -266,7 +266,7 @@
       <div class="selamat">Selamat! 🎉</div>
       <img class="open-box" id="revealBox" src="assets/BB_.png" alt="">
       <div class="won-cap">Kamu memenangkan diskon</div>
-      <div class="prize-amt" id="prizeAmt">Rp 3.500.000</div>
+      <div class="prize-amt" id="prizeAmt">Rp 3.000.000 + 1.000.000!</div>
       <button class="btn pulse" id="btnClaim">Klaim Diskonmu</button>
       <p class="small">Tunjukkan layar ini ke tim RevoU untuk klaim diskonmu.</p>
     </div>
@@ -308,14 +308,19 @@
    ============================================================ */
 // Paste your Google Apps Script Web App /exec URL here to enable
 // Sheets logging + one-play-per-email. Leave "" to run offline.
-const SHEET_API = "https://script.google.com/macros/s/AKfycbyfDmgcQojuQH8DPbjXX4B7GAZgDVAFxWdinxg60onshCLU9e3EkZNeqZ3YWxHILhMGDg/exec";
+const SHEET_API = "https://script.google.com/macros/s/AKfycbwndTjMxdGwmOP3FaEIdEAhTSUYEkH1Jfa2yGlr8Il1JqAFRV3T7HCMQKDCn5tIKZvxdw/exec";
 
-// Weighted prizes: 3.5M ~90%, 4.5M ~10%, 2.5M never.
+// Which program/track this page belongs to. Logged to the shared sheet's
+// "Program" column so plays from each variation can be told apart.
+const TRACK = "General";
+
+// Weighted prizes (Rp 3.000.000 base + bonus): 5M ~10%, 4M ~70%, 3.5M ~20%.
 const PRIZES = [
-  { amount: 2500000, weight: 0  },
-  { amount: 3500000, weight: 90 },
-  { amount: 4500000, weight: 10 },
+  { amount: 5000000, label: "Rp 3.000.000 + 2.000.000!", weight: 10 },
+  { amount: 4000000, label: "Rp 3.000.000 + 1.000.000!", weight: 70 },
+  { amount: 3500000, label: "Rp 3.000.000 + 500.000!",   weight: 20 },
 ];
+const prizeLabel = amt => (PRIZES.find(p => p.amount === Number(amt)) || {}).label || rupiah(amt);
 
 const STORAGE_KEY = "revou_blindbox_played";
 
@@ -526,7 +531,7 @@ async function startGame(){
 function showAlreadyPlayed(prize){
   $('#noticeTitle').textContent = "Kamu sudah bermain!";
   $('#noticeBody').innerHTML = prize
-    ? `Email ini sudah pernah ikut. Kamu memenangkan diskon <b style="color:var(--gold)">${rupiah(prize)}</b>. Setiap email hanya bisa bermain sekali.`
+    ? `Email ini sudah pernah ikut. Kamu memenangkan diskon <b style="color:var(--gold)">${prizeLabel(prize)}</b>. Setiap email hanya bisa bermain sekali.`
     : "Email ini sudah pernah ikut. Setiap email hanya bisa bermain sekali.";
   showScene('s-notice');
 }
@@ -577,7 +582,7 @@ function doReveal(){
   duckTheme(VOL.sfxTheme);          // restore theme volume
   playSfx('sfxDing');
   state.prize = pickPrize();
-  $('#prizeAmt').textContent = rupiah(state.prize);
+  $('#prizeAmt').textContent = prizeLabel(state.prize);
   $('#revealBox').src = `assets/BB${state.box}.png`;
 
   // white flash transition
@@ -593,6 +598,7 @@ function doReveal(){
   const rec = {
     name: state.name, email: state.email,
     prize: state.prize, box: state.box,
+    program: TRACK,
     ts: new Date().toISOString(),
     ua: navigator.userAgent
   };
@@ -602,7 +608,7 @@ function doReveal(){
 
 $('#btnClaim').addEventListener('click', () => {
   $('#noticeTitle').textContent = "Diskon Tersimpan!";
-  $('#noticeBody').innerHTML = `Diskon <b style="color:var(--gold)">${rupiah(state.prize)}</b> sudah tercatat untuk <b>${state.email}</b>. Tim RevoU akan menghubungi kamu. Terima kasih sudah bermain! 🎉`;
+  $('#noticeBody').innerHTML = `Diskon <b style="color:var(--gold)">${prizeLabel(state.prize)}</b> sudah tercatat untuk <b>${state.email}</b>. Tim RevoU akan menghubungi kamu. Terima kasih sudah bermain! 🎉`;
   showScene('s-notice');
 });
 </script>
