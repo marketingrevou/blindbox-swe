@@ -8,7 +8,7 @@
   /* ============ FONT ============ */
   @font-face{
     font-family:'Silkscreen';
-    src:url('../assets/silkscreen.ttf') format('truetype');
+    src:url('/assets/silkscreen.ttf') format('truetype');
     font-weight:400;font-display:swap;
   }
 
@@ -213,28 +213,28 @@
   <div id="bgcss"></div>
   <div id="bgvig"></div>
   <canvas id="fx"></canvas>
-  <img class="brand" id="brand" src="../assets/revoulogo.png" alt="RevoU">
+  <img class="brand" id="brand" src="/assets/revoulogo.png" alt="RevoU">
   <canvas id="confetti"></canvas>
   <div id="revealFlash"></div>
 
   <!-- audio (generated) -->
-  <audio id="sfxTheme" src="../assets/theme.m4a" loop preload="auto"></audio>
-  <audio id="sfxSuspense" src="../assets/suspense.m4a" loop preload="auto"></audio>
-  <audio id="sfxDing" src="../assets/ding.mp3" preload="auto"></audio>
+  <audio id="sfxTheme" src="/assets/theme.m4a" loop preload="auto"></audio>
+  <audio id="sfxSuspense" src="/assets/suspense.m4a" loop preload="auto"></audio>
+  <audio id="sfxDing" src="/assets/ding.mp3" preload="auto"></audio>
 
   <!-- mute toggle -->
   <button class="mute-btn" id="btnMute" aria-label="Suara" aria-pressed="false">🔊</button>
 
   <!-- ===== SCENE 1: INTRO (first thing the user sees) ===== -->
   <section class="scene active" id="s-intro">
-    <img class="title-logo" src="../assets/logo.png" alt="Mystery Discount">
+    <img class="title-logo" src="/assets/logo.png" alt="Mystery Discount">
     <div class="amount">
       <span class="cap">Diskon Hingga</span>
       <span class="big">Rp 5.000.000!</span>
     </div>
     <div class="boxwrap" style="width:48%;max-width:200px;aspect-ratio:819/1024;flex:0 1 auto;min-height:0">
       <div class="box-glow"></div>
-      <img class="box-img box-float" src="boxes/BB_.png" alt="mystery box">
+      <img class="box-img box-float" src="/digital-marketing/boxes/BB_.png" alt="mystery box">
     </div>
     <button class="btn pulse" id="btnOpen">Buka Kotak →</button>
   </section>
@@ -243,9 +243,9 @@
   <section class="scene" id="s-choose">
     <div class="scene-title">Pilih 1 Kotak</div>
     <div class="boxrow">
-      <button class="choice float1" data-box="1"><img class="box-img" src="boxes/BB1.png" alt="Kotak 1"></button>
-      <button class="choice float2" data-box="2"><img class="box-img" src="boxes/BB2.png" alt="Kotak 2"></button>
-      <button class="choice float3" data-box="3"><img class="box-img" src="boxes/BB3.png" alt="Kotak 3"></button>
+      <button class="choice float1" data-box="1"><img class="box-img" src="/digital-marketing/boxes/BB1.png" alt="Kotak 1"></button>
+      <button class="choice float2" data-box="2"><img class="box-img" src="/digital-marketing/boxes/BB2.png" alt="Kotak 2"></button>
+      <button class="choice float3" data-box="3"><img class="box-img" src="/digital-marketing/boxes/BB3.png" alt="Kotak 3"></button>
     </div>
     <div class="hint" style="color:var(--text-dim);font-size:13px">Tap kotak pilihanmu</div>
   </section>
@@ -254,7 +254,7 @@
   <section class="scene" id="s-suspense">
     <div class="boxwrap">
       <div class="box-glow"></div>
-      <img class="box-img shaking" id="suspenseBox" src="boxes/BB1.png" alt="">
+      <img class="box-img shaking" id="suspenseBox" src="/digital-marketing/boxes/BB1.png" alt="">
       <div class="flash" id="suspenseFlash"></div>
     </div>
     <div class="hint">Membuka kotak…</div>
@@ -264,7 +264,7 @@
   <section class="scene" id="s-reveal">
     <div class="prize-card">
       <div class="selamat">Selamat! 🎉</div>
-      <img class="open-box" id="revealBox" src="boxes/BB_.png" alt="">
+      <img class="open-box" id="revealBox" src="/digital-marketing/boxes/BB_.png" alt="">
       <div class="won-cap">Kamu memenangkan diskon</div>
       <div class="prize-amt" id="prizeAmt">Rp 3.000.000 + 1.000.000!</div>
       <button class="btn pulse" id="btnClaim">Klaim Diskonmu</button>
@@ -284,7 +284,7 @@
   <div class="modal-overlay" id="loginModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
       <button class="modal-close" id="btnCloseLogin" aria-label="Tutup">×</button>
-      <img class="mini-box" src="boxes/BB_.png" alt="">
+      <img class="mini-box" src="/digital-marketing/boxes/BB_.png" alt="">
       <h2 id="loginTitle">Isi Data Dulu</h2>
       <p class="sub">Lalu pilih kotak &amp; menangkan diskon!</p>
       <div class="field">
@@ -399,7 +399,7 @@ let state = { name:"", email:"", box:null, prize:null };
 (function initBg(){
   const v = $('#bgvid');
   v.muted = true;                 // required for autoplay
-  v.src = "../assets/bg_loop.mp4";
+  v.src = "/assets/bg_loop.mp4";
   v.addEventListener('error', () => { v.style.display='none'; }); // CSS aurora shows through
   // nudge playback (some browsers need an explicit call)
   const tryPlay = () => { const p = v.play(); if(p && p.catch) p.catch(()=>{}); };
@@ -550,7 +550,7 @@ function onChoose(btn){
   // fade the others
   $$('#s-choose .choice').forEach(b => { if(b !== btn) b.classList.add('faded'); });
   // set suspense box to chosen art, then advance
-  $('#suspenseBox').src = `boxes/BB${state.box}.png`;
+  $('#suspenseBox').src = `/digital-marketing/boxes/BB${state.box}.png`;
   setTimeout(runSuspense, 550);
 }
 
@@ -560,8 +560,8 @@ async function runSuspense(){
   playSfx('sfxSuspense', { loop:true });
   const box = $('#suspenseBox');
   const flash = $('#suspenseFlash');
-  const chosen = `boxes/BB${state.box}.png`;
-  const mystery = "boxes/BB_.png";
+  const chosen = `/digital-marketing/boxes/BB${state.box}.png`;
+  const mystery = "/digital-marketing/boxes/BB_.png";
 
   // blink between chosen box and mystery box, slowing toward the end
   const delays = reduceMotion ? [400] : [180,180,180,200,220,250,300,360,440];
@@ -584,7 +584,7 @@ function doReveal(){
   playSfx('sfxDing');
   state.prize = pickPrize();
   $('#prizeAmt').textContent = prizeLabel(state.prize);
-  $('#revealBox').src = `boxes/BB${state.box}.png`;
+  $('#revealBox').src = `/digital-marketing/boxes/BB${state.box}.png`;
 
   // white flash transition
   const wf = $('#revealFlash');
