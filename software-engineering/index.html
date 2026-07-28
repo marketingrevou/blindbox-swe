@@ -230,7 +230,7 @@
     <img class="title-logo" src="/assets/logo.png" alt="Mystery Discount">
     <div class="amount">
       <span class="cap">Diskon Hingga</span>
-      <span class="big">Rp 5.000.000!</span>
+      <span class="big">Rp 6.500.000!</span>
     </div>
     <div class="boxwrap" style="width:48%;max-width:200px;aspect-ratio:819/1024;flex:0 1 auto;min-height:0">
       <div class="box-glow"></div>
@@ -266,7 +266,7 @@
       <div class="selamat">Selamat! 🎉</div>
       <img class="open-box" id="revealBox" src="/software-engineering/boxes/BB_.png" alt="">
       <div class="won-cap">Kamu memenangkan diskon</div>
-      <div class="prize-amt" id="prizeAmt">Rp 3.000.000 + 1.000.000!</div>
+      <div class="prize-amt" id="prizeAmt">Rp 4.500.000 + 1.000.000!</div>
       <button class="btn pulse" id="btnClaim">Klaim Diskonmu</button>
       <p class="small">Tunjukkan layar ini ke tim RevoU untuk klaim diskonmu.</p>
     </div>
@@ -314,11 +314,11 @@ const SHEET_API = "https://script.google.com/macros/s/AKfycbwndTjMxdGwmOP3FaEIdE
 // "Program" column so plays from each variation can be told apart.
 const TRACK = "Software Engineering";
 
-// Weighted prizes (Rp 3.000.000 base + bonus): 5M ~10%, 4M ~70%, 3.5M ~20%.
+// Weighted prizes (Rp 4.500.000 base + bonus): 6.5M ~10%, 5.5M ~70%, 5M ~20%.
 const PRIZES = [
-  { amount: 5000000, label: "Rp 3.000.000 + 2.000.000!", weight: 10 },
-  { amount: 4000000, label: "Rp 3.000.000 + 1.000.000!", weight: 70 },
-  { amount: 3500000, label: "Rp 3.000.000 + 500.000!",   weight: 20 },
+  { amount: 6500000, label: "Rp 4.500.000 + 2.000.000!", weight: 10 },
+  { amount: 5500000, label: "Rp 4.500.000 + 1.000.000!", weight: 70 },
+  { amount: 5000000, label: "Rp 4.500.000 + 500.000!",   weight: 20 },
 ];
 const prizeLabel = amt => (PRIZES.find(p => p.amount === Number(amt)) || {}).label || rupiah(amt);
 
