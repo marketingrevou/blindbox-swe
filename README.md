@@ -23,7 +23,12 @@ Prizes are per program (each program has its own folder + `PRIZES` array):
 ## Files
 
 ```
-index.html            The whole game (5 scenes, animations, prize logic, Sheets calls)
+index.html            Program picker (landing page — links to the three games below)
+software-engineering/index.html
+data-analytics/index.html
+digital-marketing/index.html
+                      The game itself (5 scenes, animations, prize logic, Sheets
+                      calls) — one copy per program, each with its own PRIZES array
 assets/
   BB_.png             Mystery box (intro + blink state)
   BB1/2/3.png         The three choosable boxes
@@ -87,7 +92,8 @@ That's it. The sheet auto-creates a **Plays** tab with columns:
 
 ## Changing the promo
 
-- **Prize amounts / odds:** edit the `PRIZES` array in `index.html`.
+- **Prize amounts / odds:** edit the `PRIZES` array in that program's
+  `index.html` (the root `index.html` is just the picker — it has no prizes).
 - **Discount headline number:** edit the `<span class="big">` text in the intro
-  scene. (The "MYSTERY DISCOUNT!" wordmark is an image; the *amount* is live
+  scene of that program's `index.html`. Keep it equal to the largest tier. (The "MYSTERY DISCOUNT!" wordmark is an image; the *amount* is live
   text, so you can change it freely without re-generating anything.)
