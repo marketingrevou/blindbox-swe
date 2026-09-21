@@ -230,7 +230,7 @@
     <img class="title-logo" src="/assets/logo.png" alt="Mystery Discount">
     <div class="amount">
       <span class="cap">Diskon Hingga</span>
-      <span class="big">Rp 4.000.000!</span>
+      <span class="big">Rp 3.000.000!</span>
     </div>
     <div class="boxwrap" style="width:48%;max-width:200px;aspect-ratio:819/1024;flex:0 1 auto;min-height:0">
       <div class="box-glow"></div>
@@ -266,7 +266,7 @@
       <div class="selamat">Selamat! 🎉</div>
       <img class="open-box" id="revealBox" src="/data-analytics/boxes/BB_.png" alt="">
       <div class="won-cap">Kamu memenangkan diskon</div>
-      <div class="prize-amt" id="prizeAmt">Rp 2.000.000 + 1.000.000!</div>
+      <div class="prize-amt" id="prizeAmt">Rp 1.000.000 + 1.000.000!</div>
       <button class="btn pulse" id="btnClaim">Klaim Diskonmu</button>
       <p class="small">Tunjukkan layar ini ke tim RevoU untuk klaim diskonmu.</p>
     </div>
@@ -317,9 +317,9 @@ const TRACK = "Data Analytics";
 // Weighted prizes (Rp 2.000.000 base + bonus): +2jt ~10%, +1jt ~70%, +BNSP ~20%.
 // BNSP is a certification (no cash value), so its numeric prize is the 2.000.000 base.
 const PRIZES = [
-  { amount: 4000000, label: "Rp 2.000.000 + 2.000.000!", weight: 10 },
-  { amount: 3000000, label: "Rp 2.000.000 + 1.000.000!", weight: 70 },
-  { amount: 2000000, label: "Rp 2.000.000 + BNSP",       weight: 20 },
+  { amount: 3000000, label: "Rp 1.000.000 + 2.000.000!", weight: 10 },
+  { amount: 2000000, label: "Rp 1.000.000 + 1.000.000!", weight: 70 },
+  { amount: 1000000, label: "Rp 1.000.000 + BNSP",       weight: 20 },
 ];
 const prizeLabel = amt => (PRIZES.find(p => p.amount === Number(amt)) || {}).label || rupiah(amt);
 

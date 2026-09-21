@@ -8,9 +8,17 @@ discount. Every play is logged to a Google Sheet.
 **Flow:** Intro (title card) → "Buka Kotak" → login pop-up (name + email) →
 Choose 1 of 3 boxes → Suspense (shake + blink) → Reveal (prize + claim).
 
-- **3.500.000** — ~90% of plays
-- **4.500.000** — ~10% (rare "jackpot")
-- **2.500.000** — never drops (weight 0)
+Prizes are per program (each program has its own folder + `PRIZES` array):
+
+**Data Analytics / Digital Marketing** (`data-analytics/`, `digital-marketing/`)
+- **Rp 1.000.000 + 1.000.000** — 70%
+- **Rp 1.000.000 + BNSP** — 20%
+- **Rp 1.000.000 + 2.000.000** — 10% (rare "jackpot")
+
+**Software Engineering** (`software-engineering/`)
+- **Rp 2.500.000 + 1.000.000** — 70%
+- **Rp 2.500.000 + 500.000** — 20%
+- **Rp 2.500.000 + 2.000.000** — 10% (rare "jackpot")
 
 ## Files
 
