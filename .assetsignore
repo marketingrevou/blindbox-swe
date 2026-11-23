@@ -1,0 +1,10 @@
+.git
+wrangler.jsonc
+vercel.json
+README.md
+.gitignore
+apps-script
+node_modules
+.wrangler
+.vercel
+.env*

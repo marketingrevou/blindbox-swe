@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "blindbox-swe",
+  "account_id": "8383f94454bf227d879221677a72a9a1",
+  "compatibility_date": "2026-11-20",
+  "workers_dev": true,
+  "routes": [{ "pattern": "payday.revou.co", "custom_domain": true }],
+  "assets": {
+    "directory": ".",
+    "html_handling": "auto-trailing-slash"
+  }
+}
