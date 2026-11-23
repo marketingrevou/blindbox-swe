@@ -11,14 +11,14 @@ Choose 1 of 3 boxes → Suspense (shake + blink) → Reveal (prize + claim).
 Prizes are per program (each program has its own folder + `PRIZES` array):
 
 **Data Analytics / Digital Marketing** (`data-analytics/`, `digital-marketing/`)
-- **Rp 1.000.000 + 1.000.000** — 70%
-- **Rp 1.000.000 + BNSP** — 20%
-- **Rp 1.000.000 + 2.000.000** — 10% (rare "jackpot")
+- **Rp 3.000.000 + 2.000.000** — 5% (rare "jackpot")
+- **Rp 3.000.000 + 1.000.000** — 75%
+- **Rp 3.000.000 + BNSP** — 20%
 
 **Software Engineering** (`software-engineering/`)
-- **Rp 2.500.000 + 1.000.000** — 70%
-- **Rp 2.500.000 + 500.000** — 20%
-- **Rp 2.500.000 + 2.000.000** — 10% (rare "jackpot")
+- **Rp 4.500.000 + 2.000.000** — 5% (rare "jackpot")
+- **Rp 4.500.000 + 1.000.000** — 75%
+- **Rp 4.500.000 + 500.000** — 20%
 
 ## Files
 
