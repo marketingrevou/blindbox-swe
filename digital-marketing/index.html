@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mystery Discount — RevoU Blind Box</title>
+<meta name="description" content="Buka kotak misteri dan dapatkan diskon spesial untuk program Digital Marketing RevoU.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RevoU">
+<meta property="og:title" content="Mystery Discount — RevoU Blind Box">
+<meta property="og:description" content="Buka kotak misteri dan dapatkan diskon spesial untuk program Digital Marketing RevoU.">
+<meta property="og:url" content="https://payday.revou.co/digital-marketing/">
+<meta property="og:image" content="https://payday.revou.co/assets/BB_.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mystery Discount — RevoU Blind Box">
+<meta name="twitter:description" content="Buka kotak misteri dan dapatkan diskon spesial untuk program Digital Marketing RevoU.">
+<meta name="twitter:image" content="https://payday.revou.co/assets/BB_.png">
 <style>
   /* ============ FONT ============ */
   @font-face{
@@ -218,8 +229,6 @@
   <div id="revealFlash"></div>
 
   <!-- audio (generated) -->
-  <audio id="sfxTheme" src="/assets/theme.m4a" loop preload="auto"></audio>
-  <audio id="sfxSuspense" src="/assets/suspense.m4a" loop preload="auto"></audio>
   <audio id="sfxDing" src="/assets/ding.mp3" preload="auto"></audio>
 
   <!-- mute toggle -->
@@ -337,7 +346,7 @@ const reduceMotion = window.matchMedia &&
 
 // ----- audio (fails silently if blocked/missing) -----
 let muted = false;
-const VOL = { sfxTheme:0.35, sfxSuspense:0.5, sfxDing:0.85 };
+const VOL = { sfxDing:0.85 };
 
 function playSfx(id, { loop=false, fromStart=true } = {}){
   if(muted) return;
@@ -348,22 +357,12 @@ function playSfx(id, { loop=false, fromStart=true } = {}){
 }
 function stopSfx(id){ const a=document.getElementById(id); if(a){ try{ a.pause(); }catch(e){} } }
 
-// theme song: starts on first user gesture, loops in the background
-let themeStarted = false;
-function startTheme(){
-  if(themeStarted || muted) return;
-  themeStarted = true;
-  playSfx('sfxTheme', { loop:true });
-}
-function duckTheme(v){ const a=$('#sfxTheme'); if(a) try{ a.volume = v; }catch(e){} }
-
 // mute toggle
 function applyMute(){
   $('#btnMute').textContent = muted ? '🔇' : '🔊';
   $('#btnMute').classList.toggle('muted', muted);
   $('#btnMute').setAttribute('aria-pressed', String(muted));
-  ['sfxTheme','sfxSuspense','sfxDing'].forEach(id=>{ const a=$('#'+id); if(a) a.muted = muted; });
-  if(!muted && themeStarted) playSfx('sfxTheme', { loop:true, fromStart:false });
+  ['sfxDing'].forEach(id=>{ const a=$('#'+id); if(a) a.muted = muted; });
 }
 function initMute(){
   try{ muted = localStorage.getItem('revou_muted') === '1'; }catch(e){}
@@ -372,12 +371,9 @@ function initMute(){
     muted = !muted;
     try{ localStorage.setItem('revou_muted', muted ? '1' : '0'); }catch(e){}
     applyMute();
-    if(!muted && !themeStarted) startTheme();
   });
 }
 initMute();
-// kick the theme on the very first interaction anywhere
-document.addEventListener('pointerdown', startTheme, { once:true });
 
 function pickPrize(){
   const total = PRIZES.reduce((s,p)=>s+p.weight,0);
@@ -556,8 +552,6 @@ function onChoose(btn){
 
 async function runSuspense(){
   showScene('s-suspense');
-  duckTheme(0.12);                 // lower the theme so suspense stands out
-  playSfx('sfxSuspense', { loop:true });
   const box = $('#suspenseBox');
   const flash = $('#suspenseFlash');
   const chosen = `/digital-marketing/boxes/BB${state.box}.png`;
@@ -579,8 +573,6 @@ async function runSuspense(){
 }
 
 function doReveal(){
-  stopSfx('sfxSuspense');
-  duckTheme(VOL.sfxTheme);          // restore theme volume
   playSfx('sfxDing');
   state.prize = pickPrize();
   $('#prizeAmt').textContent = prizeLabel(state.prize);

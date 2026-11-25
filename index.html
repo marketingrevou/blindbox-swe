@@ -4,6 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mystery Discount — RevoU Blind Box</title>
+<meta name="description" content="Pilih programmu dan buka kotak misteri untuk dapatkan diskon spesial program RevoU.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RevoU">
+<meta property="og:title" content="Mystery Discount — RevoU Blind Box">
+<meta property="og:description" content="Pilih programmu dan buka kotak misteri untuk dapatkan diskon spesial program RevoU.">
+<meta property="og:url" content="https://payday.revou.co/">
+<meta property="og:image" content="https://payday.revou.co/assets/BB_.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mystery Discount — RevoU Blind Box">
+<meta name="twitter:description" content="Pilih programmu dan buka kotak misteri untuk dapatkan diskon spesial program RevoU.">
+<meta name="twitter:image" content="https://payday.revou.co/assets/BB_.png">
 <style>
   /* ============ FONT ============ */
   @font-face{
@@ -54,14 +65,6 @@
   .brand{position:absolute;top:16px;left:14px;z-index:8;
     width:44px;height:44px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.5))}
 
-  /* ============ MUTE TOGGLE ============ */
-  .mute-btn{position:absolute;top:16px;right:14px;z-index:9;
-    width:38px;height:38px;border-radius:50%;border:1px solid rgba(107,83,201,.5);
-    background:rgba(10,8,20,.6);color:var(--lid);font-size:17px;line-height:1;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;padding:0}
-  .mute-btn:hover{background:rgba(10,8,20,.85)}
-  .mute-btn:focus-visible{outline:2px solid var(--purple-3);outline-offset:2px}
-  .mute-btn.muted{opacity:.7}
 
   /* ============ SCENE ============ */
   .scene{position:absolute;inset:0;z-index:5;display:flex;
@@ -127,12 +130,6 @@
   <div id="bgvig"></div>
   <img class="brand" id="brand" src="/assets/revoulogo.png" alt="RevoU">
 
-  <!-- audio -->
-  <audio id="sfxTheme" src="/assets/theme.m4a" loop preload="auto"></audio>
-
-  <!-- mute toggle -->
-  <button class="mute-btn" id="btnMute" aria-label="Suara" aria-pressed="false">🔊</button>
-
   <!-- ===== PROGRAM PICKER ===== -->
   <section class="scene" id="s-pick">
     <img class="title-logo" src="/assets/logo.png" alt="Mystery Discount">
@@ -168,49 +165,6 @@
    HELPERS
    ============================================================ */
 const $ = (s, r=document) => r.querySelector(s);
-
-/* ============================================================
-   AUDIO (theme only; fails silently if blocked/missing)
-   Shares the `revou_muted` preference with the game pages.
-   ============================================================ */
-let muted = false;
-let themeStarted = false;
-const VOL = { sfxTheme:0.35 };
-
-function startTheme(){
-  if(themeStarted || muted) return;
-  const a = $('#sfxTheme');
-  if(!a) return;
-  try{
-    a.volume = VOL.sfxTheme;
-    const p = a.play();
-    if(p && p.catch) p.catch(()=>{});
-    themeStarted = true;
-  }catch(e){}
-}
-
-function applyMuted(){
-  $('#btnMute').textContent = muted ? '🔇' : '🔊';
-  $('#btnMute').classList.toggle('muted', muted);
-  $('#btnMute').setAttribute('aria-pressed', String(muted));
-  const a = $('#sfxTheme');
-  if(a) a.muted = muted;
-}
-
-(function initAudio(){
-  try{ muted = localStorage.getItem('revou_muted') === '1'; }catch(e){}
-  applyMuted();
-  $('#btnMute').addEventListener('click', () => {
-    muted = !muted;
-    try{ localStorage.setItem('revou_muted', muted ? '1' : '0'); }catch(e){}
-    applyMuted();
-    if(!muted) startTheme();
-  });
-  // browsers block autoplay until the first interaction
-  const kick = () => { startTheme(); document.removeEventListener('pointerdown', kick); };
-  document.addEventListener('pointerdown', kick);
-  startTheme();
-})();
 
 /* ============================================================
    BACKGROUND VIDEO (with CSS fallback)
